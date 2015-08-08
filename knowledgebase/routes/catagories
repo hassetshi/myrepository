@@ -1,0 +1,25 @@
+var express = require('express');
+var router = express.Router();
+
+var Catagory = require('../models/catagory')
+
+/* GET users listing. */
+router.get('/', function(req, res, next) {
+  Catagory.getCatagories(function(err,catagories){
+  	if (err) {
+  		console.log(err);
+  	}
+  	res.json(catagories);
+  })
+});
+router.get('/:id', function(req, res, next) {
+  Catagory.getCatagoryById(req.params.id,function(err,catagory){
+  	if (err) {
+  		console.log(err);
+  	}
+  	res.json(catagory);
+  })
+});
+
+
+module.exports = router;
